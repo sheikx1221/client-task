@@ -13,7 +13,11 @@ export class AuthController {
       return { message: 'Invalid credentials' };
     }
     
-    const token = await this.authService.generateToken({ username: user.username });
+    const token = await this.authService.generateToken({
+      username: user.username,
+      id: user.id
+    });
+
     return { ...user, token };
   }
 

@@ -1,11 +1,17 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Inject, Param, Patch, Post } from '@nestjs/common';
 import { ConversationService } from './conversation.service';
 import { CreateConversationDto } from './dto/create-conversation.dto';
 import { UpdateConversationDto } from './dto/update-conversation.dto';
+import { REQUEST } from '@nestjs/core';
+import { CustomRequest } from 'types/request';
+
 
 @Controller('conversation')
 export class ConversationController {
-  constructor(private readonly conversationService: ConversationService) {}
+  constructor(
+    private readonly conversationService: ConversationService,
+    @Inject(REQUEST) private readonly request: CustomRequest
+  ) {}
 
   @Post()
   create(@Body() createConversationDto: CreateConversationDto) {
@@ -14,6 +20,7 @@ export class ConversationController {
 
   @Get()
   findAll() {
+    console.log("this.request = ",this.request.user);
     return this.conversationService.findAll();
   }
 

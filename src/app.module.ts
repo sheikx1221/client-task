@@ -7,6 +7,8 @@ import { AuthModule } from './auth/auth.module';
 import { CardModule } from './card/card.module';
 import { ConversationModule } from './conversation/conversation.module';
 import { UserModule } from './user/user.module';
+import { AuthGuard } from './auth/auth.guard';
+import { APP_GUARD } from '@nestjs/core';
 
 @Module({
   imports: [
@@ -14,6 +16,12 @@ import { UserModule } from './user/user.module';
     AuthModule, CardModule, ConversationModule, UserModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard
+    }
+  ],
 })
 export class AppModule { }

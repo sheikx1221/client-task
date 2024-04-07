@@ -1,6 +1,5 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
-import { AuthMiddleware } from './auth.middleware';
 import { AuthService } from './auth.service';
 import { UserService } from 'src/user/user.service';
 import { AuthController } from './auth.controller';
@@ -17,12 +16,7 @@ import { User } from 'src/user/entities/user.entity';
   ],
   controllers: [AuthController],
   providers: [AuthService, UserService],
+  exports: [AuthService]
 })
 
-export class AuthModule implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(AuthMiddleware)
-      .forRoutes('protected-route');
-  }
-}
+export class AuthModule {}
