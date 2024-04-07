@@ -11,7 +11,7 @@ export class Card {
     @Column("text")
     description: string;
 
-    @Column("text")
+    @Column("text", { nullable: true })
     imageURL: string;
 
     @Column("text")
@@ -20,7 +20,7 @@ export class Card {
     @Column("varchar", { array: true })
     tags: string[];
 
-    @Column("int")
+    @Column("int", { default: 0 })
     interactions: number;
     
     @CreateDateColumn({ type: 'timestamp with time zone' })

@@ -1,9 +1,10 @@
-import { Body, Controller, Delete, Get, Inject, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Inject, Param, Patch, Post, Res, UseGuards } from '@nestjs/common';
 import { ConversationService } from './conversation.service';
 import { CreateConversationDto } from './dto/create-conversation.dto';
 import { UpdateConversationDto } from './dto/update-conversation.dto';
 import { REQUEST } from '@nestjs/core';
 import { CustomRequest } from 'types/request';
+import { SSEMiddleware } from './sse.middleware';
 
 
 @Controller('conversation')
@@ -18,9 +19,14 @@ export class ConversationController {
     return this.conversationService.create(createConversationDto);
   }
 
+  @Get('sse')
+  @UseGuards(SSEMiddleware)
+  sse(@Res() res: Response) {
+    
+  }
+
   @Get()
   findAll() {
-    console.log("this.request = ",this.request.user);
     return this.conversationService.findAll();
   }
 

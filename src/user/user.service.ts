@@ -40,11 +40,11 @@ export class UserService {
   }
 
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  update(username: string, updateUserDto: UpdateUserDto) {
+    return this.userModel.update({ username }, { ...updateUserDto });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  remove(id: string) {
+    return this.userModel.softDelete(id);
   }
 }
