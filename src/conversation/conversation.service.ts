@@ -1,11 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { CreateConversationDto } from './dto/create-conversation.dto';
 import { UpdateConversationDto } from './dto/update-conversation.dto';
+import { OpenAI } from 'openai';
 
 @Injectable()
 export class ConversationService {
+  private openai: OpenAI;
+  constructor() {
+    this.openai = new OpenAI({
+      apiKey: "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"
+    });
+  }
   create(createConversationDto: CreateConversationDto) {
-    return 'This action adds a new conversation';
+    return 
   }
 
   findAll() {

@@ -1,1 +1,3 @@
-export class CreateConversationDto {}
+export class CreateConversationDto {
+    message: string;
+}
